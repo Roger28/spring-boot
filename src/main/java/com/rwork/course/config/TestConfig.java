@@ -1,5 +1,6 @@
 package com.rwork.course.config;
 
+import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.rwork.course.entities.Order;
 import com.rwork.course.entities.User;
+import com.rwork.course.repositories.OrderRepository;
 import com.rwork.course.repositories.UserRepository;
 
 @Configuration
@@ -18,10 +21,19 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		User roger = new User(null, "Roger", "roger@gmail.com", "9999-9999", "root");
 		User nana = new User(null, "Nana", "nana@gmail.com", "8888-8888", "123");
-
-		this.repository.saveAll(Arrays.asList(roger, nana));
+		this.userRepository.saveAll(Arrays.asList(roger, nana));
+		
+		Order o1 = new Order(null, Instant.parse("2019-11-22T17:45:09Z"), roger);
+		Order o2 = new Order(null, Instant.parse("2015-11-01T10:45:09Z"), nana);
+		Order o3 = new Order(null, Instant.parse("2010-11-15T12:45:09Z"), roger);
+		
+		this.userRepository.saveAll(Arrays.asList(roger, nana));
+		this.orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 	}
 
 	@Autowired
-	private UserRepository repository;
+	private UserRepository userRepository;
+	
+	@Autowired
+	private OrderRepository orderRepository;
 }
