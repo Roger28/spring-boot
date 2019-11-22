@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.rwork.course.entities.Category;
 import com.rwork.course.entities.Order;
+import com.rwork.course.entities.Product;
 import com.rwork.course.entities.User;
 import com.rwork.course.entities.enums.OrderStatus;
 import com.rwork.course.repositories.CategoryRepository;
 import com.rwork.course.repositories.OrderRepository;
+import com.rwork.course.repositories.ProductRepository;
 import com.rwork.course.repositories.UserRepository;
 
 @Configuration
@@ -26,7 +28,15 @@ public class TestConfig implements CommandLineRunner {
 		Category c2 = new Category(null, "Computers");
 		Category c3 = new Category(null, "Books");
 
+		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
 		this.categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+		this.productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
 		User roger = new User(null, "Roger", "roger@gmail.com", "9999-9999", "root");
 		User nana = new User(null, "Nana", "nana@gmail.com", "8888-8888", "123");
@@ -47,4 +57,7 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
 }
