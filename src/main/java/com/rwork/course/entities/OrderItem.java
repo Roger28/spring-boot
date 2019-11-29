@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rwork.course.entities.pk.OrderItemPK;
 
 @Entity
@@ -17,12 +18,14 @@ public class OrderItem implements Serializable{
 	}
 
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
+		this.id = new OrderItemPK();
 		this.id.setOrder(order);
 		this.id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return this.id.getOrder();
 	}

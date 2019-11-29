@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.rwork.course.entities.Category;
 import com.rwork.course.entities.Order;
+import com.rwork.course.entities.OrderItem;
 import com.rwork.course.entities.Product;
 import com.rwork.course.entities.User;
 import com.rwork.course.entities.enums.OrderStatus;
 import com.rwork.course.repositories.CategoryRepository;
+import com.rwork.course.repositories.OrderItemRepository;
 import com.rwork.course.repositories.OrderRepository;
 import com.rwork.course.repositories.ProductRepository;
 import com.rwork.course.repositories.UserRepository;
@@ -57,6 +59,13 @@ public class TestConfig implements CommandLineRunner {
 
 		this.userRepository.saveAll(Arrays.asList(roger, nana));
 		this.orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		this.orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 
 	@Autowired
@@ -70,4 +79,7 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 }
