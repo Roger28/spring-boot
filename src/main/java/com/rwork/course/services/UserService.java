@@ -20,6 +20,10 @@ public class UserService {
 		Optional<User> user = this.repository.findById(id);
 		return user.get();
 	}
+	
+	public User insert(User user) {
+		return this.repository.save(user);
+	}
 
 	@Autowired
 	private UserRepository repository;
