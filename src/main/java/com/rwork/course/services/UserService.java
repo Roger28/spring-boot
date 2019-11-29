@@ -28,6 +28,18 @@ public class UserService {
 	public void delete(Long id) {
 		this.repository.deleteById(id);
 	}
+	
+	public User update(Long id, User obj) {
+		User user = this.repository.getOne(id);
+		updateData(user, obj);
+		return this.repository.save(user);
+	}
+
+	private void updateData(User user, User obj) {
+		user.setName(obj.getName());
+		user.setEmail(obj.getEmail());
+		user.setPhone(obj.getPhone());
+	}
 
 	@Autowired
 	private UserRepository repository;
