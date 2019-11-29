@@ -18,8 +18,8 @@ public class ProductResource {
 
 	@GetMapping
 	public ResponseEntity<List<Product>> findAll() {
-		List<Product> users = this.service.findAll();
-		return ResponseEntity.ok().body(users);
+		List<Product> products = this.service.findAll();
+		return ResponseEntity.ok().body(products);
 	}
 
 	@GetMapping(value = "/{id}")

@@ -17,8 +17,8 @@ public class CategoryService {
 	}
 
 	public Category findById(Long id) {
-		Optional<Category> user = this.repository.findById(id);
-		return user.get();
+		Optional<Category> category = this.repository.findById(id);
+		return category.get();
 	}
 
 	@Autowired

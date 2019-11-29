@@ -17,8 +17,8 @@ public class OrderService {
 	}
 	
 	public Order findById(Long id) {
-		Optional<Order> user = this.repository.findById(id);
-		return user.get();
+		Optional<Order> order = this.repository.findById(id);
+		return order.get();
 	}
 
 	@Autowired
