@@ -11,8 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_product")
@@ -28,6 +31,7 @@ public class Product implements Serializable {
 		this.price = price;
 		this.imgUrl = imgUrl;
 		this.categories = new HashSet<>();
+		this.items = new HashSet<>();
 	}
 
 	public Long getId() {
@@ -75,6 +79,14 @@ public class Product implements Serializable {
 		return this.categories;
 	}
 	
+	@JsonIgnore
+	public Set<Order> getOrders(){
+		Set<Order> orders = new HashSet<>();
+		for(OrderItem oi : items)
+			orders.add(oi.getOrder());
+		return orders;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,5 +127,8 @@ public class Product implements Serializable {
 	joinColumns = @JoinColumn(name = "product_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories;
+	
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items;
 
 }
